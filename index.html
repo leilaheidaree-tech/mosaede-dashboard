@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>داشبورد مساعده‌های تجاری | مهر ۱۴۰۴ تا مهر ۱۴۰۵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#F6F8FB; --ink:#16233D; --ink-2:#44526B; --ink-3:#7A869C;
+  --line:#DFE4EC; --accent:#F2B705; --accent-ink:#5A4300; --navy:#16233D; --good:#1F8A70; --good-bg:#E3F3EE;
+  --live:#C77A00; --live-bg:#FFF3D6; --bad:#C8414F; --bad-bg:#FBE7E9; --grid:#E8ECF2;
+  --hero-bg:#16233D; --hero-ink:#FFFFFF; --hero-sub:#AEB9CC;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1524; --surface:#162036; --surface-2:#1B2741; --ink:#EAF0FA; --ink-2:#B5C0D4; --ink-3:#7F8BA3;
+    --line:#26324D; --accent:#F5C21B; --accent-ink:#F5C21B; --good:#3CC29E; --good-bg:#123A33; --live:#F2B705; --live-bg:#3A2F10;
+    --bad:#F07282; --bad-bg:#3D1A22; --grid:#223050; --hero-bg:#0A1020; --hero-sub:#8D99B2;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1524; --surface:#162036; --surface-2:#1B2741; --ink:#EAF0FA; --ink-2:#B5C0D4; --ink-3:#7F8BA3;
+  --line:#26324D; --accent:#F5C21B; --accent-ink:#F5C21B; --good:#3CC29E; --good-bg:#123A33; --live:#F2B705; --live-bg:#3A2F10;
+  --bad:#F07282; --bad-bg:#3D1A22; --grid:#223050; --hero-bg:#0A1020; --hero-sub:#8D99B2;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Vazirmatn",Tahoma,"Segoe UI",sans-serif;font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+button{font-family:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:1280px;margin:0 auto;padding:0 20px}
+
+/* hero */
+.hero{background:var(--hero-bg);color:var(--hero-ink);padding:28px 0 96px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -1px -10%;height:6px;background:var(--accent)}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px}
+.brand-mark{width:42px;height:42px;border-radius:12px;background:var(--accent);display:grid;place-items:center;color:#16233D;font-weight:900;font-size:20px}
+.brand h1{margin:0;font-size:18px;font-weight:800;letter-spacing:0}
+.brand p{margin:0;font-size:12.5px;color:var(--hero-sub)}
+.controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.seg{display:inline-flex;background:rgba(255,255,255,.08);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;color:var(--hero-sub);padding:6px 14px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600}
+.seg button[aria-pressed="true"]{background:var(--accent);color:#16233D}
+.ghost{border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;padding:7px 14px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600}
+.ghost:hover{background:rgba(255,255,255,.08)}
+.headline{margin:44px 0 0;max-width:900px}
+.headline .period{display:inline-flex;gap:8px;align-items:center;font-size:13px;color:var(--hero-sub);margin-bottom:10px}
+.headline .period i{width:8px;height:8px;border-radius:50%;background:var(--accent);display:inline-block}
+.headline h2{margin:0;font-size:clamp(24px,3.6vw,40px);line-height:1.55;font-weight:800}
+.headline h2 b{color:var(--accent);font-weight:900}
+.headline p{color:var(--hero-sub);margin:12px 0 0;font-size:15px;max-width:720px}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:-64px;position:relative;z-index:2}
+.kpi{background:var(--surface);border-radius:16px;padding:18px 20px;border:1px solid var(--line);box-shadow:0 10px 30px -18px rgba(22,35,61,.45)}
+.kpi .lab{font-size:13px;color:var(--ink-3);font-weight:600}
+.kpi .val{font-size:30px;font-weight:900;line-height:1.3;margin-top:4px;color:var(--ink)}
+.kpi .val small{font-size:14px;font-weight:600;color:var(--ink-2);margin-inline-start:4px}
+.kpi .sub{font-size:12.5px;color:var(--ink-2);margin-top:6px;display:flex;gap:6px;flex-wrap:wrap}
+.kpi.primary{background:var(--accent);border-color:transparent}
+.kpi.primary .lab,.kpi.primary .sub{color:#4A3800}
+.kpi.primary .val,.kpi.primary .val small{color:#16233D}
+.pill{display:inline-flex;align-items:center;gap:5px;padding:1px 9px;border-radius:999px;font-size:12px;font-weight:700;white-space:nowrap}
+.pill.live{background:var(--live-bg);color:var(--live)}
+.pill.good{background:var(--good-bg);color:var(--good)}
+.pill.bad{background:var(--bad-bg);color:var(--bad)}
+.pill.neutral{background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.pill .d{width:6px;height:6px;border-radius:50%;background:currentColor}
+
+/* sections */
+section.block{margin-top:28px}
+.sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.sec-h h3{margin:0;font-size:19px;font-weight:800}
+.sec-h p{margin:2px 0 0;color:var(--ink-3);font-size:13px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px}
+.grid-2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid-2.even{grid-template-columns:1fr 1fr}
+.panel h4{margin:0 0 4px;font-size:15px;font-weight:800}
+.panel .hint{margin:0 0 14px;font-size:12.5px;color:var(--ink-3)}
+
+/* holders */
+.holders{display:flex;flex-direction:column;gap:10px}
+.holder{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;text-align:start;color:inherit;width:100%;transition:border-color .15s,background .15s}
+.holder:hover{border-color:var(--ink-3)}
+.holder[aria-pressed="true"]{border-color:var(--accent);background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 25%,transparent)}
+.avatar{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;color:#fff;font-size:16px}
+.h-name{font-weight:800;font-size:15px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.h-meta{font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.bar{height:7px;background:var(--grid);border-radius:99px;margin-top:8px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:99px}
+.h-amt{text-align:left;direction:rtl}
+.h-amt b{display:block;font-size:16px;font-weight:900}
+.h-amt span{font-size:12px;color:var(--ink-3)}
+
+/* charts */
+.chart{width:100%;overflow-x:auto}
+.chart svg{display:block;width:100%;height:auto;direction:ltr}
+.chart svg text{direction:rtl;unicode-bidi:plaintext;font-family:inherit}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:12.5px;color:var(--ink-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.donut-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.mix-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.mix-list li{display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:13.5px}
+.mix-list li .bar{grid-column:1/-1;margin-top:0}
+.mix-list b{font-weight:800}
+.matrix{width:100%;border-collapse:separate;border-spacing:6px}
+.matrix th{font-size:12.5px;color:var(--ink-3);font-weight:600;text-align:center}
+.matrix td{text-align:center;border-radius:12px;padding:12px 6px;background:var(--surface-2);border:1px solid var(--line)}
+.matrix td b{display:block;font-size:22px;font-weight:900;line-height:1.2}
+.matrix td span{font-size:11.5px;color:var(--ink-3)}
+.matrix th[scope=row]{text-align:start}
+
+/* insights */
+.insights{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.ins{display:flex;gap:12px;padding:14px 16px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.ins .ic{flex:none;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:17px}
+.ins h5{margin:0;font-size:14.5px;font-weight:800}
+.ins p{margin:3px 0 0;font-size:13.5px;color:var(--ink-2)}
+
+/* ledger */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.search{flex:1;min-width:200px;position:relative}
+.search input{width:100%;padding:10px 38px 10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-family:inherit;font-size:14px}
+.search svg{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--ink-3)}
+select{padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);font-family:inherit;font-size:14px}
+.chip-btn{border:1px solid var(--line);background:var(--surface-2);color:var(--ink-2);padding:9px 14px;border-radius:12px;cursor:pointer;font-size:13px;font-weight:600}
+.chip-btn[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+:root[data-theme="dark"] .chip-btn[aria-pressed="true"]{background:var(--accent);color:#16233D}
+.table-wrap{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+table.ledger{width:100%;border-collapse:collapse;font-size:13.5px;min-width:880px}
+.ledger th{background:var(--surface-2);text-align:start;font-weight:700;color:var(--ink-2);padding:10px 12px;font-size:12.5px;white-space:nowrap;cursor:pointer;user-select:none;position:sticky;top:0}
+.ledger th[data-sort]::after{content:"↕";opacity:.35;margin-inline-start:4px;font-size:11px}
+.ledger th.asc::after{content:"↑";opacity:1}.ledger th.desc::after{content:"↓";opacity:1}
+.ledger td{padding:11px 12px;border-top:1px solid var(--line);vertical-align:middle}
+.ledger tr.muted td{opacity:.6}
+.ledger tr.muted td.amt{text-decoration:line-through}
+.ledger td.amt{font-weight:800;white-space:nowrap}
+.ledger td .who{display:flex;align-items:center;gap:8px;font-weight:700;white-space:nowrap}
+.ledger td .who i{width:9px;height:9px;border-radius:3px}
+.ledger td small{display:block;color:var(--ink-3);font-size:11.5px}
+.ltr{direction:ltr;unicode-bidi:isolate;display:inline-block}
+.ledger tfoot td{background:var(--surface-2);font-weight:800;border-top:2px solid var(--line)}
+.empty{padding:28px;text-align:center;color:var(--ink-3)}
+
+.tip{position:fixed;pointer-events:none;z-index:50;background:var(--navy);color:#fff;padding:9px 12px;border-radius:10px;font-size:12.5px;line-height:1.7;box-shadow:0 10px 30px -10px rgba(0,0,0,.5);opacity:0;transition:opacity .12s;max-width:260px}
+:root[data-theme="dark"] .tip{background:#F1F4F9;color:#16233D}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tip{background:#F1F4F9;color:#16233D}}
+.tip b{font-weight:800}
+footer{color:var(--ink-3);font-size:12.5px;padding:28px 0 40px;line-height:2}
+footer p{margin:0}
+
+.explain{background:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--accent);border-radius:12px;padding:12px 16px;font-size:13.5px;color:var(--ink-2);margin-bottom:14px;line-height:2}
+.explain b{color:var(--ink)}
+.filter-note{display:none;align-items:center;gap:8px;font-size:13px;background:var(--live-bg);color:var(--live);padding:6px 12px;border-radius:10px;font-weight:600}
+.filter-note.on{display:inline-flex}
+.filter-note button{border:0;background:transparent;color:inherit;font-weight:800;cursor:pointer;text-decoration:underline}
+
+.reveal{animation:rise .7s cubic-bezier(.2,.7,.2,1) both}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion: reduce){.reveal{animation:none}*{transition:none!important}}
+
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,1fr)}.grid-2,.grid-2.even,.grid-3{grid-template-columns:1fr}.insights{grid-template-columns:1fr}}
+@media (max-width:520px){.kpis{grid-template-columns:1fr 1fr;gap:10px}.kpi{padding:14px}.kpi .val{font-size:22px}.holder{grid-template-columns:38px 1fr}.holder .h-amt{grid-column:2;text-align:start}.avatar{width:38px;height:38px}.hero{padding-bottom:84px}}
+@media print{
+  .controls,.toolbar,.filter-note{display:none!important}
+  body{background:#fff}.hero{padding-bottom:30px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .kpis{margin-top:16px}.panel,.kpi,.ins{break-inside:avoid;box-shadow:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">م</div>
+        <div>
+          <h1>گزارش مساعده‌داران تجاری</h1>
+          <p>فروش سازمانی | تهیه‌شده برای واحد مالی</p>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="seg" role="group" aria-label="واحد پول">
+          <button type="button" data-unit="toman" aria-pressed="true">تومان</button>
+          <button type="button" data-unit="rial" aria-pressed="false">ریال</button>
+        </div>
+        <button type="button" class="ghost" id="themeBtn" aria-label="تغییر حالت روشن و تیره">◐ حالت نمایش</button>
+        
+      </div>
+    </div>
+    <div class="headline reveal">
+      <div class="period"><i></i><span id="periodTxt"></span></div>
+      <h2 id="headlineTxt"></h2>
+      <p id="headlineSub"></p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="kpis reveal" id="kpis"></div>
+
+  <section class="block">
+    <div class="sec-h">
+      <div><h3>مساعده‌داران و سهم هر نفر</h3><p>روی هر نام بزنید تا نمودارها و جدول تراکنش‌ها فقط برای همان شخص نمایش داده شود.</p></div>
+      <div class="filter-note" id="filterNote"><span id="filterTxt"></span><button type="button" id="clearFilter">نمایش همه</button></div>
+    </div>
+    <div class="explain"><b>نحوه خواندن اعداد:</b> مساعده دائمیِ جاری مثل تنخواه گردان عمل می‌کند. مساعده‌دار هر مبلغی را که هزینه و کلیم کند، همان مبلغ دوباره به حسابش شارژ می‌شود. بنابراین مبلغ کنار نام این افراد «جمع شارژهای سال»، یعنی هزینه‌کرد کلیم‌شده آن‌هاست، نه سقف مساعده. در مساعده موقت، مبلغ یک‌جا پرداخت و بعداً تسویه شده است.</div>
+    <div class="grid-2">
+      <div class="panel"><div class="holders" id="holders"></div></div>
+      <div class="panel">
+        <h4>سهم از کل مبلغ پرداختی</h4>
+        <p class="hint">درصد هر مساعده‌دار از مجموع تراکنش‌های سال</p>
+        <div class="donut-wrap"><div class="chart" id="donut" style="max-width:300px"></div></div>
+        <div class="legend" id="donutLegend" style="justify-content:center"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-h"><div><h3>روند ماهانه پرداخت‌ها</h3><p>مبلغ پرداخت و شارژ در هر ماه، به تفکیک مساعده‌دار. عدد بالای هر ستون تعداد تراکنش‌های آن ماه است.</p></div></div>
+    <div class="panel"><div class="chart" id="monthly"></div><div class="legend" id="monthlyLegend"></div></div>
+  </section>
+
+  <section class="block">
+    <div class="grid-2 even">
+      <div class="panel">
+        <h4>موضوع مصرف</h4>
+        <p class="hint">بر اساس شرح ثبت‌شده در سند تراکنش</p>
+        <ul class="mix-list" id="purpose"></ul>
+      </div>
+      <div class="panel">
+        <h4>نوع و وضعیت مساعده‌ها</h4>
+        <p class="hint">تعداد نفرات و جمع تراکنش هر گروه در سال</p>
+        <table class="matrix" id="matrix"></table>
+      </div>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="sec-h"><div><h3>نکات کلیدی برای تصمیم‌گیری</h3><p>برداشت‌های مستقیم از داده‌های همین گزارش</p></div></div>
+    <div class="insights" id="insights"></div>
+  </section>
+
+  <section class="block">
+    <div class="sec-h"><div><h3>ریز تراکنش‌ها</h3><p>هر ردیف یک پرداخت یا شارژ است و کارمزد بانکی آن کنارش آمده.</p></div></div>
+    <div class="panel">
+      <div class="toolbar">
+        <label class="search"><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">جستجو</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="q" type="search" placeholder="جستجو در نام، شرح، شماره تراکنش…">
+        </label>
+        <select id="fPerson" aria-label="فیلتر مساعده‌دار"></select>
+        <select id="fStatus" aria-label="فیلتر وضعیت"><option value="">همه وضعیت‌ها</option><option>جاری</option><option>تسویه شده</option></select>
+        
+      </div>
+      <div class="table-wrap">
+        <table class="ledger">
+          <thead><tr>
+            <th data-sort="date">تاریخ</th><th data-sort="name">مساعده‌دار</th><th>شرح</th><th>نوع تراکنش</th><th data-sort="amount">مبلغ</th><th data-sort="fee">کارمزد</th><th>شماره تراکنش</th>
+          </tr></thead>
+          <tbody id="rows"></tbody>
+          <tfoot id="foot"></tfoot>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>منبع: فایل «گزارش مساعده تجاری»، بازه ۱۴۰۴/۰۷/۰۸ تا ۱۴۰۵/۰۷/۰۸.</p>
+    <p>مبالغ بدون کارمزد بانکی محاسبه شده‌اند.</p>
+  </footer>
+</main>
+<div class="tip" id="tip" role="tooltip"></div>
+
+<script>
+const RAW = [{"date": "1404/07/08", "time": "11:37:51", "name": "رزا نجفیان", "amount": 45889019, "fee": 18400, "type": "دائمی", "status": "تسویه شده", "purpose": "مساعده تجاری (هزینه پست ارسال مودم و سیم‌کارت)", "cat": "پست (ارسال مودم و سیم‌کارت)", "src": "فروش سازمانی ایرانسل", "txid": "7898103108", "doc": "3871265190", "rev": false}, {"date": "1404/08/17", "time": "11:32:22", "name": "رزا نجفیان", "amount": 47139000, "fee": 18400, "type": "دائمی", "status": "تسویه شده", "purpose": "مساعده تجاری (هزینه پست ارسال مودم و سیم‌کارت)", "cat": "پست (ارسال مودم و سیم‌کارت)", "src": "فروش سازمانی ایرانسل", "txid": "8731051487", "doc": "4283198712", "rev": false}, {"date": "1404/08/17", "time": "12:22:23", "name": "محسن بیات", "amount": 81720142, "fee": 29600, "type": "دائمی", "status": "جاری", "purpose": "مساعده تجاری (هزینه مناقصات)", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "8732293445", "doc": "4283814212", "rev": false}, {"date": "1404/09/15", "time": "10:10:51", "name": "رزا نجفیان", "amount": 48410945, "fee": 18400, "type": "دائمی", "status": "تسویه شده", "purpose": "شارژ ادونس پست", "cat": "پست (ارسال مودم و سیم‌کارت)", "src": "فروش سازمانی ایرانسل", "txid": "9349968678", "doc": "4589551221", "rev": false}, {"date": "1404/09/15", "time": "11:38:51", "name": "رزا نجفیان", "amount": 42018900, "fee": 18400, "type": "دائمی", "status": "تسویه شده", "purpose": "شارژ مساعده تجاری پست", "cat": "پست (ارسال مودم و سیم‌کارت)", "src": "فروش سازمانی ایرانسل", "txid": "9351905418", "doc": "4590510377", "rev": false}, {"date": "1404/09/18", "time": "13:51:56", "name": "محمدرضا سپهرسبحانی", "amount": 200000000, "fee": 20000, "type": "موقت", "status": "تسویه شده", "purpose": "مساعده تجاری (هزینه پذیرایی جلسه)", "cat": "پذیرایی جلسات", "src": "فروش سازمانی ایرانسل", "txid": "9425027381", "doc": "4626664003", "rev": false}, {"date": "1404/09/18", "time": "14:20:18", "name": "مریم آذین", "amount": 200000000, "fee": 20000, "type": "موقت", "status": "تسویه شده", "purpose": "مساعده تجاری (هزینه پذیرایی جلسه)", "cat": "پذیرایی جلسات", "src": "فروش سازمانی ایرانسل", "txid": "9425616286", "doc": "4626955502", "rev": false}, {"date": "1404/10/01", "time": "11:46:37", "name": "محسن بیات", "amount": 64664873, "fee": 24000, "type": "دائمی", "status": "جاری", "purpose": "مساعده تجاری بابت هزینه مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "9711689296", "doc": "4768691580", "rev": false}, {"date": "1405/02/27", "time": "13:31:54", "name": "محسن بیات", "amount": 96771341, "fee": 37800, "type": "دائمی", "status": "جاری", "purpose": "شارژ مساعده تجاری (هزینه مناقصات)", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "12622364698", "doc": "6213031940", "rev": false}, {"date": "1405/02/29", "time": "09:48:20", "name": "محسن بیات", "amount": 94760963, "fee": 37800, "type": "دائمی", "status": "جاری", "purpose": "هزینه مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "12662509845", "doc": "6232967984", "rev": false}, {"date": "1405/03/12", "time": "11:17:00", "name": "محسن بیات", "amount": 76158875, "fee": 31400, "type": "دائمی", "status": "جاری", "purpose": "هزینه مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "12985923110", "doc": "6393481315", "rev": false}, {"date": "1405/03/13", "time": "10:45:49", "name": "محسن بیات", "amount": 66192750, "fee": 28200, "type": "دائمی", "status": "جاری", "purpose": "شارژ مساعده تجاری بابت مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "13008149229", "doc": "6404512782", "rev": false}, {"date": "1405/03/16", "time": "10:09:02", "name": "محسن بیات", "amount": 70942626, "fee": 31400, "type": "دائمی", "status": "جاری", "purpose": "شارژ مساعده تجاری مربوط به مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "13069544672", "doc": "6435026892", "rev": false}, {"date": "1405/03/25", "time": "14:21:35", "name": "محسن بیات", "amount": 100000000, "fee": 37800, "type": "دائمی", "status": "جاری", "purpose": "مساعده تجاری بابت مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "13286599175", "doc": "6542791135", "rev": false}, {"date": "1405/03/25", "time": "14:26:12", "name": "صاحبه کاکوئی", "amount": 300000000, "fee": 30000, "type": "موقت", "status": "تسویه شده", "purpose": "مساعده تجاری جهت شرکت در مناقصه فاوا", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "13286686760", "doc": "6542834607", "rev": false}, {"date": "1405/04/02", "time": "09:13:19", "name": "محسن بیات", "amount": 64759500, "fee": 28200, "type": "دائمی", "status": "جاری", "purpose": "شارژ مساعده تجاری بابت مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "13421883208", "doc": "6609731660", "rev": false}, {"date": "1405/04/02", "time": "09:14:27", "name": "محسن بیات", "amount": 68900000, "fee": 28200, "type": "دائمی", "status": "جاری", "purpose": "شارژ مساعده تجاری بابت مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "13421896285", "doc": "6609738090", "rev": false}, {"date": "1405/05/20", "time": "08:53:05", "name": "محسن بیات", "amount": 198758690, "fee": 19876, "type": "دائمی", "status": "جاری", "purpose": "مناقصات", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "14241261805", "doc": "7014318661", "rev": false}, {"date": "1405/05/25", "time": "08:32:36", "name": "محسن بیات", "amount": 130165197, "fee": 13017, "type": "دائمی", "status": "جاری", "purpose": "مناقصه", "cat": "مناقصات", "src": "فروش سازمانی ایرانسل", "txid": "14321569875", "doc": "7054021124", "rev": false}, {"date": "1405/06/30", "time": "12:39:39", "name": "زهرا حیدری", "amount": 300000000, "fee": 30000, "type": "دائمی", "status": "جاری", "purpose": "مساعده تجاری (هزینه‌های دفتر مدیرکل کسب‌وکار سازمانی)", "cat": "دفتر مدیرکل کسب‌وکار سازمانی", "src": "CASHEB1", "txid": "15002394380", "doc": "7390173602", "rev": false}, {"date": "1405/07/04", "time": "11:12:52", "name": "محسن بیات", "amount": 138141450, "fee": 13815, "type": "دائمی", "status": "جاری", "purpose": "هزینه مناقصات", "cat": "مناقصات", "src": "CASHEB1", "txid": "15097126582", "doc": "7436889680", "rev": false}, {"date": "1405/07/08", "time": "08:33:08", "name": "زهرا حیدری", "amount": 247366925, "fee": 24737, "type": "دائمی", "status": "جاری", "purpose": "شارژ مساعده تجاری مربوط به هزینه های بخش کسب و کار سازمانی", "cat": "دفتر مدیرکل کسب‌وکار سازمانی", "src": "CASHEB1", "txid": "15181278187", "doc": "7478449450", "rev": false}];
+const COLORS = {"محسن بیات":"#F2B705","زهرا حیدری":"#2F7BD8","صاحبه کاکوئی":"#1F8A70","رزا نجفیان":"#9061C2","مریم آذین":"#E07A2F","محمدرضا سپهرسبحانی":"#5E7391"};
+const MONTHS = ["فروردین","اردیبهشت","خرداد","تیر","مرداد","شهریور","مهر","آبان","آذر","دی","بهمن","اسفند"];
+const state = {unit:"toman", person:"", status:"", q:"", showRev:false, sort:{key:"date",dir:-1}};
+
+const fa = s => String(s).replace(/\d/g, d => "۰۱۲۳۴۵۶۷۸۹"[d]);
+const grp = n => fa(Math.round(n).toLocaleString("en-US").replace(/,/g,"٬"));
+const conv = r => state.unit==="toman" ? r/10 : r;
+const uName = () => state.unit==="toman" ? "تومان" : "ریال";
+function money(r){ return grp(conv(r)); }
+function compact(r, withUnit=true){
+  const v = conv(r); let s;
+  if (v>=1e9) s = fa((v/1e9).toFixed(v>=1e10?1:2).replace(/\.?0+$/,"").replace(".", "٫"))+" میلیارد";
+  else if (v>=1e6) s = fa((v/1e6).toFixed(v>=1e8?0:1).replace(/\.0$/,"").replace(".", "٫"))+" میلیون";
+  else if (v>=1e3) s = fa((v/1e3).toFixed(0))+" هزار";
+  else s = grp(v);
+  return withUnit ? s+" "+uName() : s;
+}
+const pct = (a,b) => fa((a/b*100).toFixed(1).replace(/\.0$/,"").replace(".", "٫"))+"٪";
+const ym = d => d.slice(0,7);
+const monthLabel = k => { const [y,m]=k.split("/"); return MONTHS[+m-1]+" "+fa(y.slice(2)); };
+const initials = n => n.split(" ")[0][0];
+
+const effective = RAW.filter(p => !p.rev && !p.reversed);
+const people = [...new Set(RAW.map(p=>p.name))];
+
+function holderStats(list){
+  const m = {};
+  list.forEach(p=>{
+    const h = m[p.name] ||= {name:p.name,total:0,fee:0,n:0,max:0,first:p.date,last:p.date,type:p.type,status:p.status,chs:new Set(),cats:{}};
+    h.total+=p.amount; h.fee+=p.fee; h.n++; h.max=Math.max(h.max,p.amount);
+    if(p.date<h.first)h.first=p.date; if(p.date>h.last)h.last=p.date; h.chs.add(p.ch); h.cats[p.cat]=(h.cats[p.cat]||0)+p.amount;
+  });
+  return Object.values(m).sort((a,b)=>b.total-a.total);
+}
+const ALL = holderStats(effective);
+const TOTAL = ALL.reduce((s,h)=>s+h.total,0);
+const FEES = effective.reduce((s,p)=>s+p.fee,0);
+
+function scope(){ return state.person ? effective.filter(p=>p.name===state.person) : effective; }
+
+/* ---------- header & KPIs ---------- */
+function renderHeader(){
+  document.getElementById("periodTxt").textContent = "دوره گزارش: "+fa("1404/07/08")+" تا "+fa("1405/07/08")+" (یک سال کامل)";
+  const live = ALL.filter(h=>h.status==="جاری").length;
+  document.getElementById("headlineTxt").innerHTML =
+    `در یک سال گذشته <b>${fa(ALL.length)} نفر</b> مساعده تجاری داشته‌اند و طی <b>${fa(effective.length)} تراکنش</b> مجموعاً <b>${compact(TOTAL)}</b> پرداخت و شارژ شده است.`;
+  document.getElementById("headlineSub").textContent =
+    `${fa(live)} مساعده دائمی همچنان جاری است و با کلیم هزینه‌ها مرتب شارژ می‌شود. ${fa(ALL.length-live)} مساعده تسویه و بسته شده است. بیشترین سهم با ${ALL[0].name} است با ${pct(ALL[0].total,TOTAL)} از کل مبلغ.`;
+}
+function renderKPIs(){
+  const list = scope(); const hs = holderStats(list);
+  const total = list.reduce((s,p)=>s+p.amount,0), fee = list.reduce((s,p)=>s+p.fee,0);
+  const live = hs.filter(h=>h.status==="جاری").length;
+  const avg = list.length? total/list.length : 0;
+  const cm={}; list.forEach(p=>{ if(p.cat!=="بدون شرح مشخص") cm[p.cat]=(cm[p.cat]||0)+p.amount; });
+  const topCat = Object.entries(cm).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById("kpis").innerHTML = `
+    <div class="kpi"><div class="lab">تعداد مساعده‌داران</div><div class="val">${fa(hs.length)} <small>نفر</small></div>
+      <div class="sub"><span class="pill live"><span class="d"></span>${fa(live)} جاری</span><span class="pill good"><span class="d"></span>${fa(hs.length-live)} تسویه‌شده</span></div></div>
+    <div class="kpi primary"><div class="lab">مجموع تراکنش یک‌ساله (پرداخت و شارژ)</div><div class="val">${compact(total,false)} <small>${uName()}</small></div>
+      <div class="sub">${money(total)} ${uName()}</div></div>
+    <div class="kpi"><div class="lab">تعداد تراکنش‌ها</div><div class="val">${fa(list.length)} <small>تراکنش</small></div>
+      <div class="sub">میانگین هر تراکنش ${compact(avg)}</div></div>
+    <div class="kpi"><div class="lab">بیشترین موضوع مصرف</div><div class="val">${topCat?topCat[0]:"—"}</div>
+      <div class="sub">${topCat?pct(topCat[1],total)+" از مبلغ | "+compact(topCat[1]):""}</div></div>`;
+}
+
+/* ---------- holders ---------- */
+function renderHolders(){
+  const el = document.getElementById("holders");
+  el.innerHTML = ALL.map(h=>{
+    const st = h.status==="جاری" ? `<span class="pill live"><span class="d"></span>جاری | شارژ دوره‌ای</span>` : `<span class="pill good"><span class="d"></span>تسویه‌شده</span>`;
+    const ty = `<span class="pill neutral">${h.type}</span>`;
+    const main = Object.entries(h.cats).sort((a,b)=>b[1]-a[1])[0][0];
+    return `<button type="button" class="holder" data-p="${h.name}" aria-pressed="${state.person===h.name}">
+      <div class="avatar" style="background:${COLORS[h.name]};${h.name==="محسن بیات"?"color:#16233D":""}">${initials(h.name)}</div>
+      <div><div class="h-name">${h.name} ${ty} ${st}</div>
+        <div class="h-meta">${h.type==="دائمی"? fa(h.n)+" بار شارژ" : "پرداخت یک‌جا"} | ${h.n>1?"از "+fa(h.first)+" تا "+fa(h.last):"تاریخ "+fa(h.first)} | موضوع: ${main}</div>
+        <div class="bar"><span style="width:${h.total/ALL[0].total*100}%;background:${COLORS[h.name]}"></span></div></div>
+      <div class="h-amt"><b>${compact(h.total)}</b><span>${pct(h.total,TOTAL)} از کل</span></div>
+    </button>`;
+  }).join("");
+  el.querySelectorAll(".holder").forEach(b=>b.onclick=()=>setPerson(state.person===b.dataset.p?"":b.dataset.p));
+}
+
+/* ---------- tooltip ---------- */
+const tip = document.getElementById("tip");
+function showTip(e,html){ tip.innerHTML=html; tip.style.opacity=1; moveTip(e); }
+function moveTip(e){ const x=e.clientX, y=e.clientY, w=tip.offsetWidth, h=tip.offsetHeight;
+  tip.style.left=Math.min(window.innerWidth-w-8,Math.max(8,x-w/2))+"px"; tip.style.top=(y-h-14<8? y+18 : y-h-14)+"px"; }
+function hideTip(){ tip.style.opacity=0; }
+function bindTips(root){ root.querySelectorAll("[data-tip]").forEach(n=>{
+  n.addEventListener("mouseenter",e=>showTip(e,n.getAttribute("data-tip"))); n.addEventListener("mousemove",moveTip); n.addEventListener("mouseleave",hideTip);
+  n.addEventListener("touchstart",e=>{showTip(e.touches[0],n.getAttribute("data-tip"));},{passive:true});
+});}
+const cssv = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+/* ---------- donut ---------- */
+function renderDonut(){
+  const R=110, r=72, C=150; let a0=-Math.PI/2; let paths="";
+  ALL.forEach(h=>{
+    const frac=h.total/TOTAL, a1=a0+frac*2*Math.PI, large=frac>.5?1:0;
+    const p=(ang,rad)=>[C+rad*Math.cos(ang),C+rad*Math.sin(ang)];
+    const [x0,y0]=p(a0,R),[x1,y1]=p(a1,R),[x2,y2]=p(a1,r),[x3,y3]=p(a0,r);
+    const dim = state.person && state.person!==h.name ? .22 : 1;
+    paths+=`<path d="M${x0},${y0} A${R},${R} 0 ${large} 1 ${x1},${y1} L${x2},${y2} A${r},${r} 0 ${large} 0 ${x3},${y3}Z" fill="${COLORS[h.name]}" opacity="${dim}" stroke="${cssv('--surface')}" stroke-width="2" style="cursor:pointer" data-p="${h.name}"
+      data-tip="<b>${h.name}</b><br>${money(h.total)} ${uName()}<br>${pct(h.total,TOTAL)} از کل | ${fa(h.n)} تراکنش"/>`;
+    a0=a1;
+  });
+  const focus = state.person ? ALL.find(h=>h.name===state.person) : null;
+  const center = focus ? `<text x="150" y="140" text-anchor="middle" font-size="26" font-weight="900" fill="${cssv('--ink')}">${pct(focus.total,TOTAL)}</text><text x="150" y="170" text-anchor="middle" font-size="13" fill="${cssv('--ink-3')}">${focus.name}</text>`
+    : `<text x="150" y="142" text-anchor="middle" font-size="24" font-weight="900" fill="${cssv('--ink')}">${compact(TOTAL,false)}</text><text x="150" y="170" text-anchor="middle" font-size="13" fill="${cssv('--ink-3')}">${uName()} | کل سال</text>`;
+  const el=document.getElementById("donut");
+  el.innerHTML=`<svg viewBox="0 0 300 300" role="img" aria-label="سهم هر مساعده‌دار">${paths}${center}</svg>`;
+  bindTips(el); el.querySelectorAll("path").forEach(p=>p.onclick=()=>setPerson(state.person===p.dataset.p?"":p.dataset.p));
+  document.getElementById("donutLegend").innerHTML = ALL.map(h=>`<span><i style="background:${COLORS[h.name]}"></i>${h.name}</span>`).join("");
+}
+
+/* ---------- monthly ---------- */
+function monthKeys(){ const k=[]; let y=1404,m=7; while(y<1405||(y===1405&&m<=7)){ k.push(`${y}/${String(m).padStart(2,"0")}`); m++; if(m>12){m=1;y++;} } return k; }
+function renderMonthly(){
+  const keys=monthKeys(), list=scope();
+  const data=keys.map(k=>{ const ps=list.filter(p=>ym(p.date)===k); const by={}; ps.forEach(p=>by[p.name]=(by[p.name]||0)+p.amount); return {k,ps,by,tot:ps.reduce((s,p)=>s+p.amount,0)}; });
+  const W=1000,H=330,pl=20,pr=70,pt=34,pb=46, iw=W-pl-pr, ih=H-pt-pb;
+  const maxV=Math.max(...data.map(d=>d.tot))||1;
+  const step = niceStep(conv(maxV)/4); const top = Math.ceil(conv(maxV)/step)*step;
+  const y = v => pt+ih - (conv(v)/top)*ih;
+  const bw = iw/keys.length;
+  let g="";
+  for(let v=0; v<=top+1e-6; v+=step){ const yy=pt+ih-(v/top)*ih;
+    g+=`<line x1="${pl}" x2="${W-pr}" y1="${yy}" y2="${yy}" stroke="${cssv('--grid')}" stroke-dasharray="${v?'3 4':''}"/>`;
+    g+=`<text x="${W-pr+10}" y="${yy+4}" font-size="12" fill="${cssv('--ink-3')}" text-anchor="end">${compact(v*(state.unit==='toman'?10:1),false)}</text>`; }
+  data.forEach((d,i)=>{
+    const cx = W-pr - (i+.5)*bw; // RTL: earliest on right
+    const w = Math.min(46,bw*.58); let acc=0;
+    ALL.forEach(h=>{ const v=d.by[h.name]; if(!v) return;
+      const y0=y(acc), y1=y(acc+v); acc+=v;
+      g+=`<rect x="${cx-w/2}" y="${y1}" width="${w}" height="${Math.max(1,y0-y1-1.5)}" rx="4" fill="${COLORS[h.name]}"
+        data-tip="<b>${monthLabel(d.k)}</b><br>${h.name}: ${money(v)} ${uName()}<br>${fa(d.ps.filter(p=>p.name===h.name).length)} تراکنش"/>`; });
+    if(d.ps.length) g+=`<text x="${cx}" y="${y(d.tot)-8}" text-anchor="middle" font-size="12.5" font-weight="800" fill="${cssv('--ink')}">${fa(d.ps.length)}</text>`;
+    else g+=`<text x="${cx}" y="${pt+ih-8}" text-anchor="middle" font-size="11" fill="${cssv('--ink-3')}">—</text>`;
+    g+=`<text x="${cx}" y="${H-pb+20}" text-anchor="middle" font-size="12" fill="${d.ps.length?cssv('--ink-2'):cssv('--ink-3')}">${MONTHS[+d.k.slice(5)-1]}</text>`;
+    g+=`<text x="${cx}" y="${H-pb+36}" text-anchor="middle" font-size="10.5" fill="${cssv('--ink-3')}">${fa(d.k.slice(0,4))}</text>`;
+  });
+  const el=document.getElementById("monthly");
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" style="min-width:640px" role="img" aria-label="نمودار ماهانه پرداخت‌ها">${g}</svg>`;
+  bindTips(el);
+  const shown = state.person? ALL.filter(h=>h.name===state.person):ALL;
+  document.getElementById("monthlyLegend").innerHTML = shown.map(h=>`<span><i style="background:${COLORS[h.name]}"></i>${h.name}</span>`).join("")+`<span style="color:var(--ink-3)">| واحد محور: ${uName()}</span>`;
+}
+function niceStep(raw){ const p=Math.pow(10,Math.floor(Math.log10(raw||1))); const n=raw/p; return (n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10)*p; }
+
+/* ---------- mix lists ---------- */
+function mixList(id, key, colors){
+  const list=scope(); const tot=list.reduce((s,p)=>s+p.amount,0)||1; const m={};
+  list.forEach(p=>{ (m[p[key]] ||= {v:0,n:0}); m[p[key]].v+=p.amount; m[p[key]].n++; });
+  document.getElementById(id).innerHTML = Object.entries(m).sort((a,b)=>b[1].v-a[1].v).map(([k,o],i)=>`
+    <li><span><b>${k}</b> <span style="color:var(--ink-3)">| ${fa(o.n)} تراکنش</span></span><span><b>${compact(o.v)}</b></span>
+      <div class="bar"><span style="width:${o.v/tot*100}%;background:${colors[i%colors.length]}"></span></div>
+      <span style="grid-column:1/-1;font-size:12px;color:var(--ink-3);margin-top:-2px">${pct(o.v,tot)} از مبلغ</span></li>`).join("");
+}
+function renderMatrix(){
+  const hs = state.person? ALL.filter(h=>h.name===state.person):ALL;
+  const cell=(t,s)=>{ const ps=hs.filter(h=>h.type===t&&h.status===s); const v=ps.reduce((a,h)=>a+h.total,0);
+    const bg = s==="جاری" ? "var(--live-bg)" : "var(--good-bg)", fg = s==="جاری"?"var(--live)":"var(--good)";
+    return `<td style="${ps.length?`background:${bg};border-color:transparent`:''}" data-tip="${ps.length? ps.map(h=>h.name).join('، '):'موردی نیست'}"><b style="color:${ps.length?fg:'var(--ink-3)'}">${fa(ps.length)}</b><span>${ps.length?compact(v):"—"}</span></td>`; };
+  const el=document.getElementById("matrix");
+  el.innerHTML=`<tr><th></th><th>جاری (شارژ دوره‌ای)</th><th>تسویه‌شده</th></tr>
+    <tr><th scope="row">دائمی</th>${cell("دائمی","جاری")}${cell("دائمی","تسویه شده")}</tr>
+    <tr><th scope="row">موقت</th>${cell("موقت","جاری")}${cell("موقت","تسویه شده")}</tr>`;
+  bindTips(el);
+}
+
+/* ---------- balance ---------- */
+/* ---------- insights ---------- */
+function renderInsights(){
+  const top=ALL[0], temp=ALL.filter(h=>h.type==="موقت"), live=ALL.filter(h=>h.status==="جاری");
+  const liveTot=live.reduce((s,h)=>s+h.total,0);
+  const tender = effective.filter(p=>p.cat==="مناقصات").reduce((s,p)=>s+p.amount,0);
+  const months = n => new Set(effective.filter(p=>p.name===n).map(p=>ym(p.date))).size;
+  const roza = ALL.find(h=>h.name==="رزا نجفیان"), zahra = ALL.find(h=>h.name==="زهرا حیدری");
+  const items=[
+    ["◎","var(--live-bg)","var(--live)",`بیشترین گردش: ${top.name}`,`مساعده دائمی ${top.name} در طول سال ${fa(top.n)} بار و در ${fa(months(top.name))} ماه مختلف شارژ شده است. جمع شارژها ${compact(top.total)} (${pct(top.total,TOTAL)} کل) است، یعنی همین مقدار هزینه کلیم شده.`],
+    ["●","var(--live-bg)","var(--live)",`${fa(live.length)} مساعده دائمی فعال`,`${live.map(h=>h.name).join(" و ")} مساعده دائمی جاری دارند که با کلیم هزینه‌ها مرتب شارژ می‌شود. جمع شارژ این دو نفر در سال ${compact(liveTot)} بوده است.`],
+    ["✓","var(--good-bg)","var(--good)",`همه مساعده‌های موقت تسویه شده‌اند`,`${temp.map(h=>h.name).join("، ")}، هر کدام یک پرداخت یک‌جا داشته‌اند و مانده‌ای باقی نیست.`],
+    ["▲","var(--surface-2)","var(--ink)",`بیشترین مصرف برای مناقصات`,`${pct(tender,TOTAL)} از کل مبلغ صرف هزینه‌های مناقصات شده است. پس از آن، هزینه‌های دفتر مدیرکل کسب‌وکار سازمانی، پذیرایی جلسات و پست قرار دارند.`],
+    ["■","var(--good-bg)","var(--good)",`یک مساعده دائمی بسته شده است`,`مساعده دائمی ${roza.name} (هزینه پست برای ارسال مودم و سیم‌کارت) پس از ${fa(roza.n)} بار شارژ تا ${fa(roza.last)}، تسویه و بسته شده است.`],
+    ["↗","var(--surface-2)","var(--ink)",`مساعده‌دار جدید در ماه‌های اخیر`,`${zahra.name} از ${fa(zahra.first)} مساعده دائمی دارد و تا ${fa(zahra.last)} جمعاً ${compact(zahra.total)} برای هزینه‌های دفتر مدیرکل کسب‌وکار سازمانی دریافت کرده است.`],
+  ];
+  document.getElementById("insights").innerHTML=items.map(([ic,bg,fg,t,p])=>`<div class="ins"><div class="ic" style="background:${bg};color:${fg}">${ic}</div><div><h5>${fa(t)}</h5><p>${fa(p)}</p></div></div>`).join("");
+}
+
+/* ---------- ledger ---------- */
+function ledgerRows(){
+  let list = effective.slice();
+  if(state.person) list=list.filter(p=>p.name===state.person);
+  if(state.status) list=list.filter(p=>p.status===state.status);
+  if(state.q){ const q=state.q.trim().replace(/[۰-۹]/g,d=>"۰۱۲۳۴۵۶۷۸۹".indexOf(d)); list=list.filter(p=>[p.name,p.purpose,p.txid,p.doc,p.date,p.cat].join(" ").includes(q)); }
+  const {key,dir}=state.sort;
+  list.sort((a,b)=>{ const va=key==="date"?a.date+a.time:a[key], vb=key==="date"?b.date+b.time:b[key]; return (va>vb?1:va<vb?-1:0)*dir; });
+  return list;
+}
+function renderLedger(){
+  const list=ledgerRows();
+  const tb=document.getElementById("rows");
+  if(!list.length){ tb.innerHTML=`<tr><td colspan="7" class="empty">تراکنشی با این فیلترها پیدا نشد. عبارت جستجو یا فیلترها را تغییر دهید.</td></tr>`; document.getElementById("foot").innerHTML=""; return; }
+  tb.innerHTML=list.map(p=>{
+    const muted = p.rev||p.reversed;
+    const tag = p.rev? `<span class="pill bad">سند برگشتی</span>` : p.reversed? `<span class="pill bad">برگشت خورده</span>` : "";
+    const st = p.status==="جاری"? `<span class="pill live"><span class="d"></span>جاری</span>`:`<span class="pill good"><span class="d"></span>تسویه‌شده</span>`;
+    return `<tr class="${muted?'muted':''}">
+      <td style="white-space:nowrap"><b>${fa(p.date)}</b><small>${fa(p.time)}</small></td>
+      <td><span class="who"><i style="background:${COLORS[p.name]}"></i>${p.name}</span></td>
+      <td>${p.purpose} ${tag}<small>${p.cat} | از حساب ${p.src}</small></td>
+      <td style="white-space:nowrap">${p.type==="دائمی"?"شارژ مساعده دائمی":"پرداخت مساعده موقت"}<br>${st}</td>
+      <td class="amt">${money(p.amount)}<small style="font-weight:500">${uName()}</small></td>
+      <td style="white-space:nowrap">${money(p.fee)}</td>
+      <td><span class="ltr" style="font-size:12.5px">${fa(p.txid)}</span><small>سند <span class="ltr">${fa(p.doc)}</span></small></td></tr>`; }).join("");
+  const eff=list.filter(p=>!p.rev&&!p.reversed);
+  document.getElementById("foot").innerHTML=`<tr><td colspan="4">جمع ${fa(eff.length)} تراکنش</td><td class="amt">${money(eff.reduce((s,p)=>s+p.amount,0))}</td><td>${money(eff.reduce((s,p)=>s+p.fee,0))}</td><td>${uName()}</td></tr>`;
+  document.querySelectorAll(".ledger th[data-sort]").forEach(th=>{ th.classList.remove("asc","desc"); if(th.dataset.sort===state.sort.key) th.classList.add(state.sort.dir>0?"asc":"desc"); });
+}
+document.querySelectorAll(".ledger th[data-sort]").forEach(th=>th.onclick=()=>{ const k=th.dataset.sort; state.sort = {key:k, dir: state.sort.key===k? -state.sort.dir : (k==="name"?1:-1)}; renderLedger(); });
+
+/* ---------- controls ---------- */
+const fP=document.getElementById("fPerson");
+fP.innerHTML=`<option value="">همه مساعده‌داران</option>`+ALL.map(h=>`<option>${h.name}</option>`).join("");
+fP.onchange=()=>setPerson(fP.value);
+document.getElementById("fStatus").onchange=e=>{state.status=e.target.value;renderLedger();};
+document.getElementById("q").oninput=e=>{state.q=e.target.value;renderLedger();};
+
+document.getElementById("clearFilter").onclick=()=>setPerson("");
+document.querySelectorAll("[data-unit]").forEach(b=>b.onclick=()=>{ state.unit=b.dataset.unit; document.querySelectorAll("[data-unit]").forEach(x=>x.setAttribute("aria-pressed",x===b)); renderAll(); });
+document.getElementById("themeBtn").onclick=()=>{ const r=document.documentElement; const dark = r.dataset.theme? r.dataset.theme==="dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  r.dataset.theme = dark?"light":"dark"; try{localStorage.setItem("theme",r.dataset.theme);}catch(e){} renderAll(); };
+try{ const t=localStorage.getItem("theme"); if(t) document.documentElement.dataset.theme=t; }catch(e){}
+
+function setPerson(p){
+  state.person=p; fP.value=p;
+  const n=document.getElementById("filterNote"); n.classList.toggle("on",!!p); document.getElementById("filterTxt").textContent= p? "نمایش فقط برای: "+p : "";
+  renderAll();
+}
+function renderAll(){ renderHeader(); renderKPIs(); renderHolders(); renderDonut(); renderMonthly(); mixList("purpose","cat",["#F2B705","#2F7BD8","#9061C2","#8A97AD","#1F8A70","#E07A2F"]); renderMatrix(); renderInsights(); renderLedger(); }
+renderAll();
+if(document.fonts) document.fonts.ready.then(renderAll);
+</script>
+</body>
+</html>
